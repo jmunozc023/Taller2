@@ -5,7 +5,8 @@ package taller2;
  * @author josep
  */
 public class Taller2 {
-        public static void menu() {
+
+    public static void menu() {
         System.out.println("----- MENÚ PRINCIPAL -----");
         System.out.println("1. Iniciar Lista");
         System.out.println("2. Insertar al Final");
@@ -21,6 +22,12 @@ public class Taller2 {
 
     public static void main(String[] args) {
 
+        lista l = new lista();
+        Producto producto = null;
+        l.inicializarLista();
+        l.ingresarFinal(producto);
+        l.imprimirLista();
+
     }
-    
+
 }

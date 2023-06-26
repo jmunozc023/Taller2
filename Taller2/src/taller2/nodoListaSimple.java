@@ -5,7 +5,7 @@ package taller2;
  * @author josep
  */
 public class nodoListaSimple {
-    int dato;
+    Producto producto;
     nodoListaSimple siguiente;
     
 }
