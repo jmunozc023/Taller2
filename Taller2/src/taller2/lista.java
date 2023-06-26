@@ -121,8 +121,9 @@ public class lista {
             }
             anterior = actual;
             actual = actual.siguiente;
-            System.out.println("Producto eliminado correctamente");
+            
         }
+        System.out.println("Producto eliminado correctamente");
     }
 
     public void modificar(int codigo) {
