@@ -12,13 +12,9 @@ public class lista {
     private nodoListaSimple primero;
     private nodoListaSimple ultimo;
 
-    public lista(nodoListaSimple primero, nodoListaSimple ultimo) {
-        this.primero = primero;
-        this.ultimo = ultimo;
-    }
-
     public lista() {
-
+        primero = null;
+        ultimo = null;
     }
 
     public nodoListaSimple getPrimero() {
@@ -38,64 +34,85 @@ public class lista {
     }
 
     public void inicializarLista() {
-        lista lista = new lista(primero, ultimo);
-        primero= null;
-        ultimo= null;
+        primero = null;
+        ultimo = null;
+        System.out.println("Lista inicializada correctamente. ");
     }
 
     public Producto solicitarProducto() {
-        int cod=0;
-        String desc=null;
-        int prec=0;
-        Producto producto = new Producto(cod, desc, prec);
         System.out.println("Ingrese el codigo del producto: ");
-        cod = scanner.nextInt();
-        //scanner.next();
-        producto.setCodigoProducto(cod);
+        int cod = scanner.nextInt();
         System.out.println("Ingrese la descripcion del producto: ");
-        desc = scanner.next();
-        producto.setDescripcionProducto(desc);
+        String desc = scanner.next();
         System.out.println("Ingrese el precio del producto: ");
-        prec = scanner.nextInt();
-        producto.setPrecioProducto(prec);
+        int prec = scanner.nextInt();
+        Producto producto = new Producto(cod, desc, prec);
         return producto;
     }
 
-    public void ingresarFinal(Producto producto) {
-        solicitarProducto();
+    public void ingresarFinal() {
+        Producto producto = solicitarProducto();
         nodoListaSimple nodoNuevo = new nodoListaSimple();
         nodoNuevo.producto = producto;
         if (getPrimero() == null) {
             setPrimero(nodoNuevo);
-            getPrimero().siguiente = null;
-            setPrimero(primero);
+            setUltimo(nodoNuevo);
+            nodoNuevo.siguiente = null;
+            setPrimero(nodoNuevo);
         } else {
             getUltimo().siguiente = nodoNuevo;
             nodoNuevo.siguiente = null;
             setUltimo(nodoNuevo);
         }
+        System.out.println("Producto ingresado exitosamente. ");
     }
 
-    public void buscar(Producto producto) {
-        int dato = 0;
-        nodoListaSimple actual = new nodoListaSimple();
-        actual = getPrimero();
+    public void ingresarAntes() {
+        Producto producto = solicitarProducto();
+        nodoListaSimple nodoNuevo = new nodoListaSimple();
+        nodoNuevo.producto = producto;
+        if (getPrimero() == null) {
+            setPrimero(nodoNuevo);
+            setUltimo(nodoNuevo);
+            nodoNuevo.siguiente = null;
+        } else {
+            nodoNuevo.siguiente = getPrimero();
+            setPrimero(nodoNuevo);
+        }
+        System.out.println("Producto ingresado exitosamente. ");
+    }
+
+    public int obtenerTotal() {
+        int total = 0;
+        nodoListaSimple actual = getPrimero();
         while (actual != null) {
-            if (actual.producto.getCodigoProducto() == dato) {
-                System.out.println("nodo encontrado");
+            total += actual.producto.getPrecioProducto();
+            actual = actual.siguiente;
+        }
+        return total * 100;
+    }
+
+    public void buscar(int codigo) {
+        nodoListaSimple actual = getPrimero();
+        while (actual != null) {
+            if (actual.producto.getCodigoProducto() == codigo) {
+                System.out.println("Producto encontrado");
+                System.out.println("Codigo: " + actual.producto.getCodigoProducto());
+                System.out.println("Descripcion: " + actual.producto.getDescripcionProducto());
+                System.out.println("Precio: " + actual.producto.getPrecioProducto());
+            } else {
+                System.out.println("Producto no encontrado. ");
             }
             actual = actual.siguiente;
         }
+        
     }
 
-    public void eliminar(Producto producto) {
-        int dato = 0;
-        nodoListaSimple actual = new nodoListaSimple();
-        nodoListaSimple anterior = new nodoListaSimple();
-        actual = getPrimero();
-        anterior = null;
+    public void eliminar(int codigo) {
+        nodoListaSimple actual = getPrimero();
+        nodoListaSimple anterior = null;
         while (actual != null) {
-            if (actual.producto.getCodigoProducto() == dato) {
+            if (actual.producto.getCodigoProducto() == codigo) {
                 if (actual == getPrimero()) {
                     setPrimero(getPrimero().siguiente);
                 } else {
@@ -104,14 +121,34 @@ public class lista {
             }
             anterior = actual;
             actual = actual.siguiente;
+            System.out.println("Producto eliminado correctamente");
+        }
+    }
+
+    public void modificar(int codigo) {
+        nodoListaSimple actual = getPrimero();
+        while (actual != null) {
+            if (actual.producto.getCodigoProducto() == codigo) {
+                System.out.println("Ingrese el nuevo código del producto:");
+                int nuevoCodigo = scanner.nextInt();
+                actual.producto.setCodigoProducto(nuevoCodigo);
+                System.out.println("Ingrese la nueva descripción del producto:");
+                String nuevaDescripcion = scanner.next();
+                actual.producto.setDescripcionProducto(nuevaDescripcion);
+                System.out.println("Ingrese el nuevo precio del producto:");
+                int nuevoPrecio = scanner.nextInt();
+                actual.producto.setPrecioProducto(nuevoPrecio);
+            }
+            actual = actual.siguiente;
+            System.out.println("Producto modificado correctamente");
         }
     }
 
     public void imprimirLista() {
-        nodoListaSimple auxiliar = new nodoListaSimple();
-        auxiliar = getPrimero();
+        nodoListaSimple auxiliar = getPrimero();
         while (auxiliar != null) {
-            System.out.println(auxiliar.producto.getCodigoProducto() + " " + auxiliar.producto.getDescripcionProducto() + " " + auxiliar.producto.getPrecioProducto());
+            Producto producto = auxiliar.producto;
+            System.out.println("Codigo: " + auxiliar.producto.getCodigoProducto() + " Descripcion: " + auxiliar.producto.getDescripcionProducto() + " Precio: " + auxiliar.producto.getPrecioProducto());
             auxiliar = auxiliar.siguiente;
         }
     }
