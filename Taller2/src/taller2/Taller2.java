@@ -61,6 +61,9 @@ public class Taller2 {
                 case 8:
                     System.out.println("Total de la suma de precios es: " + lista.obtenerTotal());
                     break;
+                case 9:
+                    System.out.println("Gracias por utilizar el sistema");
+                    break;
 
                 default:
                     System.out.println("Opcion incorrecta, intente de nuevo.");
