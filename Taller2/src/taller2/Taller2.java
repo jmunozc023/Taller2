@@ -18,7 +18,8 @@ public class Taller2 {
         System.out.println("6. Imprimir Lista");
         System.out.println("7. Insertar antes");
         System.out.println("8. Obtener el total");
-        System.out.println("9. Salir");
+        System.out.println("9. Buscar en funcion (por codigo)");
+        System.out.println("10. Salir");
         System.out.println("Seleccione una opcion: ");
     }
 
@@ -62,13 +63,18 @@ public class Taller2 {
                     System.out.println("Total de la suma de precios es: " + lista.obtenerTotal());
                     break;
                 case 9:
+                    System.out.println("Ingrese el codigo: ");
+                    codigo = sc.nextInt();
+                    System.out.println(lista.buscar2(codigo));
+                    break;
+                case 10:
                     System.out.println("Gracias por utilizar el sistema");
                     break;
 
                 default:
                     System.out.println("Opcion incorrecta, intente de nuevo.");
             }
-        } while (opcion != 9);
+        } while (opcion != 10);
 
     }
 

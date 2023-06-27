@@ -105,7 +105,21 @@ public class lista {
             }
             actual = actual.siguiente;
         }
-        
+
+    }
+
+    public String buscar2(int codigo) {
+        nodoListaSimple actual = getPrimero();
+        while (actual != null) {
+            if (actual.producto.getCodigoProducto() == codigo) {
+                return "Producto encontrado\n"
+                        + "Codigo: " + actual.producto.getCodigoProducto()
+                        + " Descripcion: " + actual.producto.getDescripcionProducto()
+                        + " Precio: " + actual.producto.getPrecioProducto();
+            }
+            actual = actual.siguiente;
+        }
+        return "Producto no encontrado.";
     }
 
     public void eliminar(int codigo) {
@@ -121,7 +135,7 @@ public class lista {
             }
             anterior = actual;
             actual = actual.siguiente;
-            
+
         }
         System.out.println("Producto eliminado correctamente");
     }
